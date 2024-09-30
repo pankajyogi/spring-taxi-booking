@@ -2,7 +2,6 @@ package com.github.pankajyogi.spring.taxibooking.internal.cache.impl;
 
 import com.github.pankajyogi.spring.taxibooking.internal.cache.Cache;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -10,19 +10,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 public class BookingReportServiceImplTest {
@@ -41,7 +39,7 @@ public class BookingReportServiceImplTest {
         BookingDO bookingDO = new BookingDO();
         BookingInfo bookingInfo = new BookingInfo();
 
-        when(jdbcTemplate.queryForList(any(String.class), any(Class.class))).thenReturn(List.of(bookingDO));
+        when(jdbcTemplate.query(any(String.class), any(RowMapper.class))).thenReturn(List.of(bookingDO));
 
         List<BookingInfo> result = bookingReportServiceImpl.getBookingsBetween(LocalDate.now().minusMonths(1), LocalDate.now());
 
@@ -54,7 +52,7 @@ public class BookingReportServiceImplTest {
         LocalDate startDate = LocalDate.now().minusDays(2);
         LocalDate endDate = LocalDate.now().minusDays(1);
 
-        when(jdbcTemplate.queryForList(any(String.class), any(Class.class))).thenReturn(Collections.emptyList());
+        when(jdbcTemplate.query(any(String.class), any(RowMapper.class))).thenReturn(Collections.emptyList());
 
         List<BookingInfo> result = bookingReportServiceImpl.getBookingsBetween(startDate, endDate);
 

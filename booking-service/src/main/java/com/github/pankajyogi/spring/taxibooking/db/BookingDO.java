@@ -29,6 +29,7 @@ public class BookingDO {
 
     private String paymentId;
 
+    @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
 
     private String pickupLocation;

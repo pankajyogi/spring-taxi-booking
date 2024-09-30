@@ -2,14 +2,11 @@ package com.github.pankajyogi.spring.taxibooking.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pankajyogi.spring.taxibooking.model.BookingRequest;
-import com.github.pankajyogi.spring.taxibooking.model.BookingResponse;
 import com.github.pankajyogi.spring.taxibooking.model.StringConstants;
 import com.github.pankajyogi.spring.taxibooking.model.TaxiInfo;
 import com.github.pankajyogi.spring.taxibooking.service.TaxiService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -18,9 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(TaxiRestController.class)

@@ -95,6 +95,10 @@ Note: To run server listening on different port, run as follows (replace port wi
 %JAVA_HOME%\bin\java -Dserver.port=<port> -jar booking-service\target\booking-service-1.0.0-SNAPSHOT.jar
 ```
 
+### Swagger UI
+swagger ui is available at `http://localhost:8443/swagger-ui/index.html` by default. If port is different change the port
+accordingly.
+
 ## Running the client program
 
 1. For each client, open a new command prompt
@@ -118,7 +122,7 @@ pass the following parameter on command line
 
 To fetch these information, this application exposes REST endpoints under /api/admin path. Following are the sample
 requests
-to fetch details from the service
+to fetch details from the service. Note that: `X-User-Id` header is required to pass and it can be any string.
 
 ### Get available taxis
 
@@ -131,3 +135,42 @@ GET http://<server_url>/api/admin/availableTaxis
 ```
 GET http://<server_url>/api/admin/bookingsReport
 ```
+
+## Sending new booking requests by Customer
+To invoke customer APIs, one need to pass `X-Customer-Id` header along with the request. This can be any Long value.
+
+Sample payload to create new booking (customerId in payload and above header should match)
+```json
+{
+    "customerId": <customer_id>,
+    "pickupLocation": {
+        "latitude": 30.4567,
+        "longitude": 45.3345
+    },
+    "dropOffLocation": {
+        "latitude": 30.4567,
+        "longitude": 45.3444
+    }
+}
+```
+
+To check the status, one need to send response of above request as payload to /api/booking/status api. We are checking 
+bookingId in DB to fetch latest detail
+
+## Sending requests as taxi agent
+To invoke taxi agent APIs, one need to pass `X-Taxi-Id` header along with the request. This can be any Long value.
+
+Sample payload to update status (taxiId in payload and above header should match)
+```json
+{
+    "taxiId": <taxiId>,
+    "taxiStatus": "AVAILABLE",
+    "currentLocation": {
+        "latitude": 45.90,
+        "longitude": 34.4
+    }
+}
+```
+
+To work with booking requests, one need to pass entire booking request as payload, as it has received during new booking
+query.

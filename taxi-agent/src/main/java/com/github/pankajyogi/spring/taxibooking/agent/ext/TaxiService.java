@@ -21,7 +21,7 @@ public class TaxiService {
     private final String taxiServiceUrl;
 
     @Autowired
-    public TaxiService(@Value("{taxiServerUrl}") String taxiServerUrl, RestTemplate restTemplate) {
+    public TaxiService(@Value("${taxiServerUrl}") String taxiServerUrl, RestTemplate restTemplate) {
         this.taxiServiceUrl = taxiServerUrl;
         this.restTemplate = restTemplate;
     }
@@ -39,19 +39,19 @@ public class TaxiService {
     }
 
 
-    public void getBookingRequest() {
+    public BookingRequest getBookingRequest() {
         logger.info("Requesting server to get new booking requests");
         UriBuilder uriBuilder = UriComponentsBuilder
                 .fromHttpUrl(taxiServiceUrl)
                 .path("/api/taxis/bookingRequest");
-        restTemplate.getForObject(uriBuilder.toUriString(), BookingRequest.class);
+        return restTemplate.getForObject(uriBuilder.toUriString(), BookingRequest.class);
     }
 
     public void acceptBooking(BookingRequest bookingRequest) {
         logger.info("Requesting server to accept booking");
         UriBuilder uriBuilder = UriComponentsBuilder
                 .fromHttpUrl(taxiServiceUrl)
-                .path("/api/taxis/bookingRequest");
+                .path("/api/taxis/acceptBooking");
         restTemplate.postForObject(uriBuilder.toUriString(), bookingRequest, BookingRequest.class);
     }
 

@@ -11,6 +11,8 @@ import com.github.pankajyogi.spring.taxibooking.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class BookingServiceImpl implements BookingService {
 
@@ -35,6 +37,7 @@ public class BookingServiceImpl implements BookingService {
         // add validations
         BookingDO bookingDO = bookingDOMapper.mapFrom(bookingRequest);
         bookingDO.setBookingStatus(BookingStatus.REQUESTING_TAXI);
+        bookingDO.setCreatedAt(LocalDateTime.now());
         bookingDO = bookingRepository.save(bookingDO);
 
         bookingRequest = bookingDOMapper.mapToBookingRequest(bookingDO);
