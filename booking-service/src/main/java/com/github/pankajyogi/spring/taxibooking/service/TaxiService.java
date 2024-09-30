@@ -2,7 +2,6 @@ package com.github.pankajyogi.spring.taxibooking.service;
 
 
 import com.github.pankajyogi.spring.taxibooking.model.BookingRequest;
-import com.github.pankajyogi.spring.taxibooking.model.BookingResponse;
 import com.github.pankajyogi.spring.taxibooking.model.TaxiInfo;
 
 import java.util.List;
@@ -42,5 +41,5 @@ public interface TaxiService {
      * @param bookingRequest the booking request to be processed
      * @return a BookingResponse object containing details of the accepted booking
      */
-    BookingResponse acceptBookingRequest(BookingRequest bookingRequest);
+    BookingRequest acceptBookingRequest(BookingRequest bookingRequest);
 }

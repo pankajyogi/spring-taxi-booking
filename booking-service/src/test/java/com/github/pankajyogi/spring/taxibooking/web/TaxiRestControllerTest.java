@@ -98,7 +98,7 @@ public class TaxiRestControllerTest {
     void acceptBooking_shouldCallTaxiService() throws Exception {
         BookingRequest bookingRequest = new BookingRequest();
         bookingRequest.setTaxiId(1L);
-        BookingResponse expectedResponse = new BookingResponse();
+        BookingRequest expectedResponse = new BookingRequest();
 
         given(taxiService.acceptBookingRequest(any(BookingRequest.class))).willReturn(expectedResponse);
 

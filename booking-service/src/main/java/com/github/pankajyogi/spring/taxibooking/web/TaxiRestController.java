@@ -2,7 +2,6 @@ package com.github.pankajyogi.spring.taxibooking.web;
 
 import com.github.pankajyogi.spring.taxibooking.Utils;
 import com.github.pankajyogi.spring.taxibooking.model.BookingRequest;
-import com.github.pankajyogi.spring.taxibooking.model.BookingResponse;
 import com.github.pankajyogi.spring.taxibooking.model.StringConstants;
 import com.github.pankajyogi.spring.taxibooking.model.TaxiInfo;
 import com.github.pankajyogi.spring.taxibooking.service.TaxiService;
@@ -55,7 +54,7 @@ public class TaxiRestController {
 
 
     @PostMapping("/acceptBooking")
-    public BookingResponse acceptBooking(
+    public BookingRequest acceptBooking(
             @RequestHeader(StringConstants.TAXI_ID_HEADER) Long taxiId,
             @RequestBody BookingRequest bookingRequest) {
         logger.info("Received request to accept booking for taxiId: {}, bookingId: {}", taxiId, bookingRequest.getBookingId());

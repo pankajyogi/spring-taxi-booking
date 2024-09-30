@@ -11,7 +11,6 @@ import com.github.pankajyogi.spring.taxibooking.service.TaxiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -62,7 +61,7 @@ public class TaxiServiceImpl implements TaxiService {
     }
 
     @Override
-    public BookingResponse acceptBookingRequest(BookingRequest bookingRequest) {
+    public BookingRequest acceptBookingRequest(BookingRequest bookingRequest) {
         BookingDO bookingDO = bookingRepository.findById(bookingRequest.getBookingId()).orElse(new BookingDO());
 
         // TODO invoke validation chain from here
@@ -73,7 +72,7 @@ public class TaxiServiceImpl implements TaxiService {
         bookingDO.setTaxiId(bookingRequest.getTaxiId());
         bookingRepository.save(bookingDO);
 
-        BookingResponse bookingResponse = bookingDOMapper.mapToBookingResponse(bookingDO);
+        BookingRequest bookingResponse = bookingDOMapper.mapToBookingRequest(bookingDO);
         // TODO: enrich booking response with other details
         return bookingResponse;
     }
